@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 class JobsController < ApplicationController
-  before_action :verify_current_user
-  before_action :init_graphql_client
-
   def index
     results = @smart_village.query <<~GRAPHQL
       query {

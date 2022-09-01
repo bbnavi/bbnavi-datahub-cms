@@ -1,10 +1,28 @@
 # frozen_string_literal: true
 
 class DashboardController < ApplicationController
-  before_action :verify_current_user
-  before_action :init_graphql_client
-
   def index
+    @point_of_interest_count_for_category = {}
+    @current_user.roles["role_point_of_interest_category_ids"].each do |possible_category_id|
+      poi_results = @smart_village.query <<~GRAPHQL
+        query {
+          pointsOfInterest(categoryIds: "#{possible_category_id}" ) {
+            id
+            externalId
+            name
+            visible
+            dataProvider{
+              name
+            }
+            updatedAt
+            createdAt
+          }
+        }
+      GRAPHQL
+
+      @point_of_interest_count_for_category[possible_category_id] = poi_results.data.points_of_interest.count
+    end
+
     if helpers.visible_in_role?("role_news_item")
       news_results = @smart_village.query <<~GRAPHQL
         query {
@@ -32,25 +50,13 @@ class DashboardController < ApplicationController
     if helpers.visible_in_role?("role_point_of_interest")
       poi_results = @smart_village.query <<~GRAPHQL
         query {
-          pointsOfInterest(category: "Fahrradvermietung/-service") {
+          pointsOfInterest() {
             id
           }
         }
       GRAPHQL
 
       @points_of_interest = poi_results.data.points_of_interest
-    end
-
-    if helpers.visible_in_role?("role_point_of_interest_rideshare")
-      poi_rideshare_results = @smart_village.query <<~GRAPHQL
-        query {
-          pointsOfInterest(descendants: "Mitfahrpunkte" ) {
-            id
-          }
-        }
-      GRAPHQL
-
-      @points_of_interest_rideshare = poi_rideshare_results.data.points_of_interest
     end
 
     if helpers.visible_in_role?("role_tour")

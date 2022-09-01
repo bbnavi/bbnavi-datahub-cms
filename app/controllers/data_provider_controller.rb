@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 class DataProviderController < ApplicationController
-  before_action :verify_current_user
-  before_action :init_graphql_client
-
   def edit
     auth_server = SmartVillageApi.auth_server_url
     uri = Addressable::URI.parse("#{auth_server}/data_provider/edit.json")

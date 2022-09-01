@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class SessionController < ApplicationController
+  skip_before_action :verify_current_user
+  skip_before_action :init_graphql_client
+  skip_before_action :load_category_list
+
 
   def create
     if params[:email].present? && params[:password].present?

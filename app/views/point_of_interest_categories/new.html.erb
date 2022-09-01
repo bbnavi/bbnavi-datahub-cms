@@ -1,0 +1,11 @@
+<div class="text-center">
+  <h1 class="h3 mb-0 font-weight-bold"><%= @current_category_scope.name %> anlegen</h1>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <%= form_with( url: point_of_interest_categories_path(category_id: @current_category_scope_id), method: :post, local: true) do %>
+      <%= render partial: "point_of_interest_categories/form", locals: { point_of_interest: @point_of_interest } %>
+    <% end %>
+  </div>
+</div>

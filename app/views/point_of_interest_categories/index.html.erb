@@ -1,6 +1,6 @@
 <div class="d-flex flex-wrap align-items-center row-gap justify-content-between mb-5">
-  <h1 class="h3 mb-0 pb-0 font-weight-bold mr-3">Mitfahrpunkte</h1>
-  <%= link_to new_point_of_interest_rideshare_path, class: "btn btn-sm btn-primary shadow-sm" do %>
+  <h1 class="h3 mb-0 pb-0 font-weight-bold mr-3"><%= @current_category_scope.name %></h1>
+  <%= link_to new_point_of_interest_category_path(category_id: @current_category_scope_id), class: "btn btn-sm btn-primary shadow-sm" do %>
     <i class="fas fa-plus fa-sm text-white-50"></i>
     Neuen Ort erstellen
   <% end %>
@@ -27,7 +27,7 @@
         <tr>
           <th scope="row"><%= poi.id %></th>
           <th scope="row"><%= poi.external_id %></th>
-          <td><%= link_to poi.name, edit_point_of_interest_rideshare_path(poi.id) %></td>
+          <td><%= link_to poi.name, edit_point_of_interest_category_path(id: poi.id, category_id: @current_category_scope_id) %></td>
           <td><%= toLocalDateTime(poi.updated_at) %></td>
           <td><%= toLocalDateTime(poi.created_at) %></td>
           <% if editor? %>
@@ -35,8 +35,8 @@
             <td align="center"><%= visibility_switch(poi, "PointOfInterest") %></td>
           <% end %>
           <td align="right" class="text-nowrap">
-            <%= link_to "Bearbeiten", edit_point_of_interest_rideshare_path(poi.id), class: "btn btn-sm btn-secondary" %>
-            <%= link_to point_of_interest_rideshare_path(poi.id), method: :delete, "data-confirm" => "Diesen Eintrag wirklich löschen?", class: "btn btn-sm btn-danger", title: "Löschen" do %>
+            <%= link_to "Bearbeiten", edit_point_of_interest_category_path(id: poi.id, category_id: @current_category_scope_id), class: "btn btn-sm btn-secondary" %>
+            <%= link_to point_of_interest_category_path(id: poi.id, category_id: @current_category_scope_id), method: :delete, "data-confirm" => "Diesen Eintrag wirklich löschen?", class: "btn btn-sm btn-danger", title: "Löschen" do %>
               <i class="fas fa-trash"></i>
             <% end %>
           </td>

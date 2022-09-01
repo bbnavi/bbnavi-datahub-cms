@@ -1,5 +1,6 @@
 <% fields = ["name"] %>
 <% list_of_categories = record.categories.presence || [OpenStruct.new] %>
+<% categories_for_select = @categories_for_select ? @categories_for_select : @categories %>
 
 <div id="nested-categories">
   <% list_of_categories.each_with_index do |category, index| %>
@@ -21,7 +22,7 @@
                   <label for="description">Name</label>
                   <%= fcb.select(
                         :name,
-                        options_for_select(@categories.map(&:name), fcb.object.name),
+                        options_for_select(categories_for_select.map(&:name), fcb.object.name),
                         { include_blank: true },
                         { class: "form-control" }
                       ) %>

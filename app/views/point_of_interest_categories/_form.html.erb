@@ -32,23 +32,25 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col">
-      <h2 class="d-sm-flex align-items-center justify-content-between my-4">
-        Kategorien
-      </h2>
-      <p>
-        Jeder Mitfahrpunkt kann in einer oder mehreren Kategorien abgelegt werden.
-      <p>
+  <% if @categories_for_select.any? %>
+    <div class="row">
+      <div class="col">
+        <h2 class="d-sm-flex align-items-center justify-content-between my-4">
+          Kategorien
+        </h2>
+        <p>
+          Jeder <%= @current_category_scope.name %> kann in einer oder mehreren Kategorien abgelegt werden.
+        <p>
 
-      <%= render partial: "shared/partials/categories_form", locals: { record: point_of_interest, record_type: "point_of_interest", form: f } %>
+        <%= render partial: "shared/partials/categories_form", locals: { record: point_of_interest, record_type: "point_of_interest", form: f } %>
 
-      <%= link_to "#", class: "btn btn-sm btn-secondary", id: "nested-add-category" do %>
-        <i class="fas fa-plus text-white mr-2"></i>
-        Kategorie hinzufügen
-      <% end %>
+        <%= link_to "#", class: "btn btn-sm btn-secondary", id: "nested-add-category" do %>
+          <i class="fas fa-plus text-white mr-2"></i>
+          Kategorie hinzufügen
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 
   <hr />
 
@@ -103,7 +105,7 @@
   <%= render partial: "shared/partials/media_contents_form", locals: { record: point_of_interest, form: f } %>
 
   <% if visible_in_role?("role_lunch") %>
-    <%= render partial: "point_of_interest_rideshares/form_partials/lunches_form", locals: { record: point_of_interest, form: f } %>
+    <%= render partial: "point_of_interest_categories/form_partials/lunches_form", locals: { record: point_of_interest, form: f } %>
   <% end %>
 
   <hr />

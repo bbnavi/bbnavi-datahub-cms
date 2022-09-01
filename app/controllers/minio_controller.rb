@@ -5,8 +5,6 @@ require "securerandom"
 # This controller handles file uploads to minio buckets
 # specifically for uploading images for e.g. POIs
 class MinioController < ApplicationController
-
-  before_action :verify_current_user
   before_action :minio_setup
 
   def signed_url

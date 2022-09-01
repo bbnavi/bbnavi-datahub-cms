@@ -3,7 +3,7 @@ module ApplicationHelper
     return false if @current_user.blank?
     return false if @current_user.roles.blank?
 
-    @current_user.roles.fetch(role_name, false) == true
+    @current_user.roles.fetch(role_name, false) == true || @current_user.roles.fetch(role_name, false) == "true"
   end
 
   def editor?

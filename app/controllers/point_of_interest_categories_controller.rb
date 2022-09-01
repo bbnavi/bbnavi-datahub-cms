@@ -1,28 +1,31 @@
 # frozen_string_literal: true
 
-class PointOfInterestRidesharesController < ApplicationController
-  before_action :verify_current_user
-  before_action :init_graphql_client
-  before_action :load_category_list, only: [:edit, :new, :create]
+class PointOfInterestCategoriesController < ApplicationController
+  before_action :load_current_category_scope
+  before_action :load_category_list_for_select, only: [:edit, :new, :create]
 
-  def load_category_list
-    category_id = Rails.env.development? ? 98 : 101
+  def load_current_category_scope
+    @current_category_scope_id = params[:category_id]
+    @current_category_scope = @categories.select { |c| c.id == @current_category_scope_id }.first
+  end
+
+  def load_category_list_for_select
     results = @smart_village.query <<~GRAPHQL
       query {
-        categories(children_of: #{category_id}) {
+        categories(children_of: #{@current_category_scope_id}) {
           id
           name
         }
       }
     GRAPHQL
 
-    @categories = results.data.categories
+    @categories_for_select = results.data.categories
   end
 
   def index
     results = @smart_village.query <<~GRAPHQL
       query {
-        pointsOfInterest(descendants: "Mitfahrpunkte" ) {
+        pointsOfInterest(categoryIds: "#{@current_category_scope_id}" ) {
           id
           externalId
           name
@@ -188,7 +191,7 @@ class PointOfInterestRidesharesController < ApplicationController
     @point_of_interest = results.data.point_of_interest
   rescue Graphlient::Errors::GraphQLError
     flash[:error] = "Die angeforderte Ressource ist leider nicht verfügbar"
-    redirect_to point_of_interest_rideshares_path
+    redirect_to point_of_interest_categories_path(category_id: @current_category_scope_id)
   end
 
   def create
@@ -203,7 +206,7 @@ class PointOfInterestRidesharesController < ApplicationController
     end
     new_id = results.data.create_point_of_interest.id
     flash[:notice] = "Ort wurde erstellt"
-    redirect_to edit_point_of_interest_rideshare_path(new_id)
+    redirect_to edit_point_of_interest_category_path(id: new_id, category_id: @current_category_scope_id)
   end
 
   def update
@@ -218,7 +221,7 @@ class PointOfInterestRidesharesController < ApplicationController
       flash[:error] = e.errors.messages["data"].to_s
     end
 
-    redirect_to edit_point_of_interest_rideshare_path(point_of_interest_id)
+    redirect_to edit_point_of_interest_category_path(id: point_of_interest_id, category_id: @current_category_scope_id)
   end
 
   def destroy
@@ -240,7 +243,7 @@ class PointOfInterestRidesharesController < ApplicationController
     else
       flash["notice"] = "Fehler: #{results.errors.inspect}"
     end
-    redirect_to point_of_interest_rideshares_path
+    redirect_to point_of_interest_categories_path(category_id: @current_category_scope_id)
   end
 
   private

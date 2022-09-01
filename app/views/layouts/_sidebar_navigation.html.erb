@@ -34,17 +34,17 @@
   <li class="nav-item <%= 'active' if params[:controller] == 'point_of_interests' %>">
     <a class="nav-link" href="/point_of_interests">
       <i class="fas fa-fw fa-map-pin"></i>
-      <span>Radservice</span>
+      <span>Orte</span>
     </a>
   </li>
 <% end %>
 
-<!-- Nav Item - POI Rideshares -->
-<% if visible_in_role?("role_point_of_interest_rideshare") %>
-  <li class="nav-item <%= 'active' if params[:controller] == 'point_of_interest_rideshares' %>">
-    <a class="nav-link" href="/point_of_interest_rideshares">
+<% @current_user.roles["role_point_of_interest_category_ids"].each do |possible_category_id| %>
+  <% category = @categories.select{|c| c.id == possible_category_id}.first %>
+  <li class="nav-item <%= 'active' if params[:controller] == 'point_of_interest_category' %>">
+    <a class="nav-link" href="/point_of_interest_categories?category_id=<%=possible_category_id%>">
       <i class="fas fa-fw fa-map-pin"></i>
-      <span>Mitfahrpunkte</span>
+      <span><%= category.name %></span>
     </a>
   </li>
 <% end %>

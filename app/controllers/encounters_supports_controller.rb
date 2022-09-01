@@ -1,6 +1,4 @@
 class EncountersSupportsController < ApplicationController
-  before_action :verify_current_user
-
   # display form to enter support ID
   def index
   end

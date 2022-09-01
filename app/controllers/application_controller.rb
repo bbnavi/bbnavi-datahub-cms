@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  before_action :verify_current_user
+  before_action :init_graphql_client
+  before_action :load_category_list
 
   def verify_current_user
     return redirect_to log_in_path if session["current_user"].blank?

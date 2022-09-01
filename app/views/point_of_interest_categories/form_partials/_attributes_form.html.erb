@@ -10,7 +10,7 @@
     <div class="form-group point_of_interest_attributes">
       <% ["phone", "email", "fax", "web_urls"].each do |attribute| %>
         <%= render(
-              partial: "point_of_interest_rideshares/form_partials/attributes_form_contact",
+              partial: "point_of_interest_categories/form_partials/attributes_form_contact",
               locals: {
                 index: index,
                 attribute: attribute,
