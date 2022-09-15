@@ -2,7 +2,7 @@
 
 class PointOfInterestCategoriesController < ApplicationController
   before_action :load_current_category_scope
-  before_action :load_category_list_for_select, only: [:edit, :new, :create]
+  before_action :load_category_list_for_select, only: [:index, :edit, :new, :create]
 
   def load_current_category_scope
     @current_category_scope_id = params[:category_id]
@@ -25,7 +25,7 @@ class PointOfInterestCategoriesController < ApplicationController
   def index
     results = @smart_village.query <<~GRAPHQL
       query {
-        pointsOfInterest(categoryIds: "#{@current_category_scope_id}" ) {
+        pointsOfInterest(categoryIds: "#{@categories_for_select.map(&:id).join(",")}" ) {
           id
           externalId
           name
