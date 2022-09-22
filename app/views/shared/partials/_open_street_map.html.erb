@@ -5,8 +5,8 @@
         <label for="capacity">Anzahl Stellplätze</label>
         <%= fai.number_field :capacity, class: "form-control" %>
         <p class="hint">
-          Value: number
-          <a target="_blank" href="https://wiki.openstreetmap.org/wiki/Key:capacity">https://wiki.openstreetmap.org/wiki/Key:capacity</a>
+          Möglicher Wert: Zahl
+          <a target="_blank" href="https://wiki.openstreetmap.org/wiki/DE:Key:capacity">https://wiki.openstreetmap.org/wiki/DE:Key:capacity</a>
         </p>
       </div>
     </div>
@@ -16,8 +16,8 @@
         <label for="capacity_charging">Anzahl Stellplätze mit Lademöglichkeit</label>
         <%= fai.text_field :capacity_charging, class: "form-control" %>
         <p class="hint">
-          Value: yes|no|number
-          <a target="_blank" href="https://wiki.openstreetmap.org/wiki/Key:capacity:charging">https://wiki.openstreetmap.org/wiki/Key:capacity:charging</a>
+          Möglicher Wert: yes|no|Zahl
+          <a target="_blank" href="https://wiki.openstreetmap.org/wiki/DE:Key:capacity:charging">https://wiki.openstreetmap.org/wiki/DE:Key:capacity:charging</a>
         </p>
       </div>
     </div>
@@ -27,8 +27,8 @@
         <label for="capacity_disabled">Anzahl Behindertenparkplätze</label>
         <%= fai.text_field :capacity_disabled, class: "form-control" %>
         <p class="hint">
-          Value: yes|no|number
-          <a target="_blank" href="https://wiki.openstreetmap.org/wiki/Key:capacity:disabled">https://wiki.openstreetmap.org/wiki/Key:capacity:disabled</a>
+          Möglicher Wert: yes|no|Zahl
+          <a target="_blank" href="https://wiki.openstreetmap.org/wiki/DE:Key:capacity:disabled">https://wiki.openstreetmap.org/wiki/DE:Key:capacity:disabled</a>
         </p>
       </div>
     </div>
@@ -36,10 +36,10 @@
     <div class="col-lg-6">
       <div class="form-group">
         <label for="fee">Gebühren</label>
-        <%= fai.select :fee, options_for_select( ["yes", "no"], fai.object.try(:fee)), { include_blank: true }, class: "form-control" %>
+        <%= fai.select :fee, options_for_select( [["Ja","yes"], ["Nein","no"]], fai.object.try(:fee)), { include_blank: true }, class: "form-control" %>
         <p class="hint">
-          Value: yes|no
-          <a target="_blank" href="https://wiki.openstreetmap.org/wiki/Key:fee">https://wiki.openstreetmap.org/wiki/Key:fee</a>
+          Möglicher Wert: yes|no
+          <a target="_blank" href="https://wiki.openstreetmap.org/wiki/DE:Key:fee">https://wiki.openstreetmap.org/wiki/DE:Key:fee</a>
         </p>
       </div>
     </div>
@@ -47,10 +47,10 @@
     <div class="col-lg-6">
       <div class="form-group">
         <label for="lit">Beleuchtung</label>
-        <%= fai.select :lit, options_for_select( ["yes", "no"], fai.object.try(:lit)), { include_blank: true }, class: "form-control" %>
+        <%= fai.select :lit, options_for_select( [["Ja","yes"], ["Nein","no"]], fai.object.try(:lit)), { include_blank: true }, class: "form-control" %>
         <p class="hint">
-          Value: yes|no
-          <a target="_blank" href="https://wiki.openstreetmap.org/wiki/Key:lit">https://wiki.openstreetmap.org/wiki/Key:li</a>
+          Möglicher Wert: yes|no
+          <a target="_blank" href="https://wiki.openstreetmap.org/wiki/DE:Key:lit">https://wiki.openstreetmap.org/wiki/DE:Key:li</a>
         </p>
       </div>
     </div>
@@ -63,8 +63,8 @@
                                    fai.object.try(:parking)
                                  ), { include_blank: true }, class: "form-control" %>
         <p class="hint">
-          Value: string
-          <a target="_blank" href="https://wiki.openstreetmap.org/wiki/Key:parking">https://wiki.openstreetmap.org/wiki/Key:parking</a>
+          Möglicher Wert: Beschreibung
+          <a target="_blank" href="https://wiki.openstreetmap.org/wiki/DE:Key:parking">https://wiki.openstreetmap.org/wiki/DE:Key:parking</a>
         </p>
       </div>
     </div>
@@ -72,10 +72,10 @@
     <div class="col-lg-6">
       <div class="form-group">
         <label for="shelter">Überdachung</label>
-        <%= fai.select :shelter, options_for_select( ["yes", "no"], fai.object.try(:shelter)), { include_blank: true }, class: "form-control" %>
+        <%= fai.select :shelter, options_for_select( [["Ja","yes"], ["Nein","no"]], fai.object.try(:shelter)), { include_blank: true }, class: "form-control" %>
         <p class="hint">
-          Value: yes|no
-          <a target="_blank" href="https://wiki.openstreetmap.org/wiki/Key:shelter">https://wiki.openstreetmap.org/wiki/Key:shelter</a>
+          Möglicher Wert: yes|no
+          <a target="_blank" href="https://wiki.openstreetmap.org/wiki/DE:Key:shelter">https://wiki.openstreetmap.org/wiki/DE:Key:shelter</a>
         </p>
       </div>
     </div>
@@ -85,8 +85,8 @@
         <label for="surface">Oberfläche</label>
         <%= fai.text_field :surface, class: "form-control" %>
         <p class="hint">
-          Value: string
-          <a target="_blank" href="https://wiki.openstreetmap.org/wiki/Key:surface">https://wiki.openstreetmap.org/wiki/Key:surface</a>
+          Möglicher Wert: Beschreibung
+          <a target="_blank" href="https://wiki.openstreetmap.org/wiki/DE:Key:surface">https://wiki.openstreetmap.org/wiki/DE:Key:surface</a>
         </p>
       </div>
     </div>
@@ -96,8 +96,8 @@
         <label for="utilization">Auslastung</label>
         <%= fai.text_field :utilization, class: "form-control" %>
         <p class="hint">
-          Value: string, "häufig bereits morgens überlastet"; "nur selten ausgelastet"
-          <a target="_blank" href="https://wiki.openstreetmap.org/wiki/Key:utilization">https://wiki.openstreetmap.org/wiki/Key:utilization</a>
+          Möglicher Wert: Beschreibung, "häufig bereits morgens überlastet"; "nur selten ausgelastet"
+          <a target="_blank" href="https://wiki.openstreetmap.org/wiki/DE:Key:utilization">https://wiki.openstreetmap.org/wiki/DE:Key:utilization</a>
         </p>
       </div>
     </div>
@@ -107,8 +107,8 @@
         <label for="website">Website</label>
         <%= fai.text_field :website, class: "form-control" %>
         <p class="hint">
-          Value: string
-          <a target="_blank" href="https://wiki.openstreetmap.org/wiki/Key:website">https://wiki.openstreetmap.org/wiki/Key:website</a>
+          Möglicher Wert: Beschreibung
+          <a target="_blank" href="https://wiki.openstreetmap.org/wiki/DE:Key:website">https://wiki.openstreetmap.org/wiki/DE:Key:website</a>
         </p>
       </div>
     </div>
