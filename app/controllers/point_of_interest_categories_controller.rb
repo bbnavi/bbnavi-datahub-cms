@@ -18,8 +18,8 @@ class PointOfInterestCategoriesController < ApplicationController
         }
       }
     GRAPHQL
-
     @categories_for_select = results.data.categories
+    @categories_for_select = [@current_category_scope] if @categories_for_select.empty?
   end
 
   def index
