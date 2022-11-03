@@ -41,7 +41,7 @@
 
 <% @current_user.roles["role_point_of_interest_category_ids"].each do |possible_category_id| %>
   <% category = @categories.select{|c| c.id == possible_category_id}.first %>
-  <li class="nav-item <%= 'active' if params[:controller] == 'point_of_interest_category' %>">
+  <li class="nav-item <%= 'active' if params[:controller] == 'point_of_interest_categories' && params[:category_id] == possible_category_id %>">
     <a class="nav-link" href="/point_of_interest_categories?category_id=<%=possible_category_id%>">
       <i class="fas fa-fw fa-map-pin"></i>
       <span><%= category.name %></span>

@@ -240,3 +240,7 @@ h1 {
 .file-upload-collapse {
   margin-bottom: 1em;
 }
+
+.nav-link {
+  word-wrap: anywhere;
+}
