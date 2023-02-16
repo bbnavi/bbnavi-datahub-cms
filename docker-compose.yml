@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   app:
-    image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub-cms
+    image: registry.gitlab.tpwd.de/tpwd/bb-navi/datahub-cms:staging
     environment:
       RAILS_ENV: production
       RAILS_LOG_TO_STDOUT: 1
@@ -19,7 +19,7 @@ services:
         traefik.enable: "true"
         traefik.port: 80
         traefik.docker.network: public
-        traefik.frontend.rule: Host:cms.bbnavi.de
+        traefik.frontend.rule: Host:staging.cms.bbnavi.de
       restart_policy:
         condition: on-failure
 
