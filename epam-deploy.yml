@@ -1,0 +1,36 @@
+version: '3.3'
+services:
+  app:
+    image: git.bbnavi.vk256.eu/bbnavi/datahub-cms:latest
+    environment:
+      RAILS_ENV: production
+      RAILS_LOG_TO_STDOUT: 1
+    configs:
+      - source: mainserver-common-master-key
+        target: /app/config/master.key
+    networks:
+     - public
+    logging:
+      driver: awslogs
+    deploy:
+      labels:
+        traefik.docker.network: public
+        traefik.enable: 'true'
+        traefik.http.routers.bbnavi-cms.entrypoints: websecure
+        traefik.http.routers.bbnavi-cms.rule: Host(`cms.bbnavi.vk256.eu`)
+        traefik.http.routers.bbnavi-cms.tls.certresolver: acme
+        traefik.http.services.cms.loadbalancer.server.port: '80'
+      placement:
+        constraints:
+         - node.role == worker
+volumes:
+  unicorn:
+  assets:
+
+configs:
+  mainserver-common-master-key:
+    external: true
+
+networks:
+  public:
+    external: true
